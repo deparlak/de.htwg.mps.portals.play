@@ -10,10 +10,7 @@ import play.api.mvc.Controller
 import play.api.mvc.WebSocket
 import play.libs.Akka
 import scala.concurrent.ExecutionContext.Implicits.global
-import actors.ws.WebSocketChannel
-import actors.ws.MyWebSocketActor
-import actors.ws.Game
-import controllers.actors.ws.Move
+import actors.ws.GameActor
 
 object Application extends Controller {
   
@@ -22,6 +19,6 @@ object Application extends Controller {
   }
   
   def connect = WebSocket.acceptWithActor[String, String] { request => out =>
-  	MyWebSocketActor.props(out)
+  	GameActor.props(out)
   }
 }
