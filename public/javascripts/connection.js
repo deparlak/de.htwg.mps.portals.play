@@ -55,7 +55,7 @@ $(document).ready(function() {
         else if (e.keyCode == '39') {
             websocket.send("right");
         } else if (e.keyCode == '13') {
-            websocket.send("restart");
+            websocket.send("enter");
         }
     }
     

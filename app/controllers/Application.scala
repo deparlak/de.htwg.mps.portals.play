@@ -1,16 +1,12 @@
 package controllers
 
 import play.api.Play.current
-import akka.actor.ActorSelection.toScala
-import akka.actor.PoisonPill
-import play.api.libs.iteratee.Concurrent
-import play.api.libs.iteratee.Iteratee
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import play.api.mvc.WebSocket
-import play.libs.Akka
-import scala.concurrent.ExecutionContext.Implicits.global
 import actors.ws.GameActor
+import de.htwg.mps.portals.controller.{Controller => GameController}
+
 
 object Application extends Controller {
   
@@ -19,6 +15,9 @@ object Application extends Controller {
   }
   
   def connect = WebSocket.acceptWithActor[String, String] { request => out =>
-  	GameActor.props(out)
+    val controller = new GameController
+  	val actor = GameActor.props(controller, out)
+  	controller.load()
+  	actor
   }
 }
