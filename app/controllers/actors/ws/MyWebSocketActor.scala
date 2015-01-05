@@ -37,35 +37,35 @@ class GameActor(controller : GameController, out: ActorRef) extends Actor {
       def update(e: Event) = {
 	    e match {
 	      case _: NewGame  => newGame
-	      case x: Update   => update(x.move.player)
+	      case x: Update   => move(x.move.player)
 	      case _: Wait	   => None
 	      case _: GameWon  => gameWon
 	      case _: GameLost => gameLost
 	    }
 	  }
       
-      def update(p : Player) = {
-        //status ("leave:" + p.position)
-        //status ("enter:" + p.nextPosition)
+      def move(p : Player) = {
+        status ("Update\n")
+       // status ("leave:" + p.position)
+       // status ("enter:" + p.nextPosition)
 	  }
       
       def newGame = {
-        out != ("newGame:")
-        controller.playground.player.foreach({ case(k,v) => this.update(v)})
+        status ("NewGame\n"+controller.playground.toString)
+        controller.playground.player.foreach({ case(k,v) => this.move(v)})
       }
       
 	  def gameWon = {
-	    status("gameWon:")
-	    controller.load(level.nextLevel)
+	    level.nextLevel
+	    status("GameWon\n")
 	  }
 	  
 	  def gameLost = {
-	    status("gameLost:")
+	    status("GameLost\n")
 	  }
 	
 	  // method for restarting a level and going to the nextLevel
 	  def restartLevel: Unit = {
-	    status ("restartLevel:")
 	    controller.load(level.currentLevel)
 	  }
 	

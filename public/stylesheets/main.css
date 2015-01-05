@@ -1,37 +1,29 @@
-a {
-	color:#000;
-	display:block;
-	font-size:60px;
-	height:80px;
-	position:relative;
-	text-decoration:none;
-	text-shadow:0 1px #fff;
-	width:80px;
-}
-#chess_board { border:5px solid #333; }
-#chess_board td {
-	background:#fff;
-	background:-moz-linear-gradient(top, #fff, #eee);
-	background:-webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
-	box-shadow:inset 0 0 0 1px #fff;
-	-moz-box-shadow:inset 0 0 0 1px #fff;
-	-webkit-box-shadow:inset 0 0 0 1px #fff;
-	height:80px;
-	text-align:center;
-	vertical-align:middle;
-	width:80px;
-}
-#chess_board tr:nth-child(odd) td:nth-child(even),
-#chess_board tr:nth-child(even) td:nth-child(odd) {
-	background:#ccc;
-	background:-moz-linear-gradient(top, #ccc, #eee);
-	background:-webkit-gradient(linear,0 0, 0 100%, from(#ccc), to(#eee));
-	box-shadow:inset 0 0 10px rgba(0,0,0,.4);
-	-moz-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
-	-webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+#inner {
+position: absolute;
+left: 50%;
+top: 50%;
+text-align: center; 
+width:960px;
+height:416px;
+margin-left: -480px; /*half width*/
+margin-top: -208px; /*half height*/
 }
 
-#inner {
-    width: 50%;
-    margin: 0 auto;
+.container {
+    display: table;
+    border-collapse:collapse
+}
+.column {
+    display:table-row;
+}
+.cell {
+    display: table-cell;
+    border: None;
+    left: 0px;
+    width:32px; 
+    height:32px;
+    background: url('../images/sprite/default/white.png') -32px -32px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
