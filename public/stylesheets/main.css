@@ -10,13 +10,16 @@ margin-top: -208px; /*half height*/
 }
 
 .container {
+z-index:1;
     display: table;
     border-collapse:collapse
 }
 .column {
+z-index:1;
     display:table-row;
 }
 .cell {
+    z-index:1;
     display: table-cell;
     border: None;
     left: 0px;
@@ -26,4 +29,40 @@ margin-top: -208px; /*half height*/
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+
+
+.player {
+  z-index:2;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 32px;
+  height: 32px;
+  background: url('../images/sprite/default/player/1.png');
+  background-position-y: -32px;
+
+  -webkit-animation: moveLeft .4s steps(8) infinite; /* Safari 4+ */
+  -moz-animation: moveLeft .4s steps(8) infinite;/* Fx 5+ */
+  -o-animation: moveLeft .4s steps(8) infinite; /* Opera 12+ */
+  animation: moveLeft .4s steps(8) infinite; /* IE 10+ */
+
+}
+
+
+@-webkit-keyframes moveLeft {
+	100% { background-position-x: -256px;}
+}
+
+@-webkit-keyframes moveRight {
+	100% { background-position-x: -256px;}
+}
+
+@-webkit-keyframes moveUp {
+	100% { background-position-x: -256px;}
+}
+
+@-webkit-keyframes moveDown {
+	100% { background-position-x: -256px;}
 }

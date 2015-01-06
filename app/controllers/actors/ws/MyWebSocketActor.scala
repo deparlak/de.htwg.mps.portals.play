@@ -45,9 +45,11 @@ class GameActor(controller : GameController, out: ActorRef) extends Actor {
 	  }
       
       def move(p : Player) = {
-        status ("Update\n")
-       // status ("leave:" + p.position)
-       // status ("enter:" + p.nextPosition)
+        var str = "Update\n"
+          str += p.uuid + "\n"
+          str += p.position.toString + "\n"
+          str += p.nextPosition.toString + "\n"
+        status (str)
 	  }
       
       def newGame = {
