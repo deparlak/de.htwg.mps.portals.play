@@ -32,37 +32,67 @@ z-index:1;
 }
 
 
-
-.player {
+.playerMoveLeft {
   z-index:2;
   position: absolute; 
   top: 0; 
   left: 0; 
   width: 32px;
   height: 32px;
-  background: url('../images/sprite/default/player/1.png');
+  background: url('../images/sprite/default/player/Human.png');
   background-position-y: -32px;
+  -webkit-animation: move .4s steps(8) infinite; /* Safari 4+ */
+  -moz-animation: move .4s steps(8) infinite;/* Fx 5+ */
+  -o-animation: move .4s steps(8) infinite; /* Opera 12+ */
+  animation: move .4s steps(8) infinite; /* IE 10+ */
+}
 
-  -webkit-animation: moveLeft .4s steps(8) infinite; /* Safari 4+ */
-  -moz-animation: moveLeft .4s steps(8) infinite;/* Fx 5+ */
-  -o-animation: moveLeft .4s steps(8) infinite; /* Opera 12+ */
-  animation: moveLeft .4s steps(8) infinite; /* IE 10+ */
+.playerMoveRight {
+  z-index:2;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 32px;
+  height: 32px;
+  background: url('../images/sprite/default/player/Human.png');
+  background-position-y: 0px;
+  -webkit-animation: move .4s steps(8) infinite; /* Safari 4+ */
+  -moz-animation: move .4s steps(8) infinite;/* Fx 5+ */
+  -o-animation: move .4s steps(8) infinite; /* Opera 12+ */
+  animation: move .4s steps(8) infinite; /* IE 10+ */
+}
 
+.playerMoveUp {
+  z-index:2;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 32px;
+  height: 32px;
+  background: url('../images/sprite/default/player/Human.png');
+  background-position-y: -64px;
+  -webkit-animation: move .4s steps(8) infinite; /* Safari 4+ */
+  -moz-animation: move .4s steps(8) infinite;/* Fx 5+ */
+  -o-animation: move .4s steps(8) infinite; /* Opera 12+ */
+  animation: move .4s steps(8) infinite; /* IE 10+ */
+}
+
+.playerMoveDown {
+  z-index:2;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 32px;
+  height: 32px;
+  background: url('../images/sprite/default/player/Human.png');
+  background-position-y: -96px;
+  -webkit-animation: move .4s steps(8) infinite; /* Safari 4+ */
+  -moz-animation: move .4s steps(8) infinite;/* Fx 5+ */
+  -o-animation: move .4s steps(8) infinite; /* Opera 12+ */
+  animation: move .4s steps(8) infinite; /* IE 10+ */
 }
 
 
-@-webkit-keyframes moveLeft {
-	100% { background-position-x: -256px;}
-}
-
-@-webkit-keyframes moveRight {
-	100% { background-position-x: -256px;}
-}
-
-@-webkit-keyframes moveUp {
-	100% { background-position-x: -256px;}
-}
-
-@-webkit-keyframes moveDown {
+@-webkit-keyframes move {
 	100% { background-position-x: -256px;}
 }

@@ -72,6 +72,11 @@ $(document).ready(function() {
     
     function onMessage(evt) {
         if (0 == evt.data.indexOf(NEW_GAME)) {
+            // get players from old game (to remove the divs).
+            var players = $("[id^=PLAYER]");
+            for (var i = 0; i < players.size(); +i++) {
+                players[i].remove();
+            }
             newGame(evt.data.substring(NEW_GAME.length + 1));
         } else if (0 == evt.data.indexOf(UPDATE)){
             update(evt.data.substring(UPDATE.length + 1))
@@ -94,7 +99,7 @@ $(document).ready(function() {
     
     function update(data) {
         data = data.split("\n");
-        var uuid = "ID" + data[0];
+        var uuid = "PLAYER" + data[0];
         var position = data[1].split(",");
         position = {x : parseInt(position[0]), y : parseInt(position[1])};
         var nextPosition = data[2].split(",");
@@ -102,18 +107,26 @@ $(document).ready(function() {
         
         if (null === document.getElementById(uuid)) {
             $("#inner").append("<div id='" + uuid + "' class='player'></div>")
+            if (uuid !== "PLAYER1") {
+                document.querySelector("#"+uuid).style.backgroundImage="url('assets/images/sprite/default/player/Bot.png')";
+            } else {
+                document.querySelector("#"+uuid).style.backgroundImage="url('assets/images/sprite/default/player/Human.png')";
+            }
         }
-
+        
+        $("#"+uuid).removeClass();
         // to the right?
         if (position.x < nextPosition.x) {
-            console.log("right");
-            document.querySelector("#"+uuid).style["background-position-y:"] = "0px";
-            document.querySelector("#"+uuid).style["-" + browserPrefix + "-animation"] = "moveRight .4s steps(8) infinite;"
+            $("#"+uuid).addClass("playerMoveRight")
         // to the left?
         } else if (position.x > nextPosition.x) {
-            console.log("left");
-            document.querySelector("#"+uuid).style["background-position-y:"] = "0px";
-            document.querySelector("#"+uuid).style["-" + browserPrefix + "-animation"] = "moveLeft .4s steps(8) infinite;"
+            $("#"+uuid).addClass("playerMoveLeft")
+        } else if (position.y < nextPosition.y) {
+            $("#"+uuid).addClass("playerMoveUp")
+        } else if (position.y > nextPosition.y){
+            $("#"+uuid).addClass("playerMoveDown")
+        } else {
+            $("#"+uuid).addClass("playerMoveRight")
         }
 
         
