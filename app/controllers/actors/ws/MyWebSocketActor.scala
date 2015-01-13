@@ -7,16 +7,19 @@ import de.htwg.mps.portals.util.Observer
 import de.htwg.mps.portals.model.Player
 import de.htwg.mps.portals.controller._
 import de.htwg.mps.portals.util._
-
 import com.escalatesoft.subcut.inject.AutoInjectable
 import com.escalatesoft.subcut.inject.BindingModule
+import de.htwg.mps.portals.view.UserInterface
+import de.htwg.mps.portals.config.TestConfiguration
+import controllers.Application
 
 object GameActor {
   def props(controller : GameController, out: ActorRef) = Props(new GameActor(controller, out))
 }
 
 class GameActor(controller : GameController, out: ActorRef) extends Actor {
-  val wui = new Wui(controller)
+  implicit val bindingModule = Application.config
+  val wui = new Wui()
   
   def receive = {
     case ("left") 		=> wui.moveLeft

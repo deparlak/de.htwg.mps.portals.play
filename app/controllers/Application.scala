@@ -20,8 +20,9 @@ import de.htwg.mps.portals.actor.AktorSystem
 object Application extends Controller with AutoInjectable {
   // get a playground instance, to readout the width and height of a playground
   val playground = new Playground
+  val config = TestConfiguration
   
-  implicit val bindingModule = TestConfiguration
+  implicit val bindingModule = config
   
   
   def index = Action {implicit request =>
