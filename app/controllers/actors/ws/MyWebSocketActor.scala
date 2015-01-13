@@ -2,11 +2,14 @@ package controllers.actors.ws
 
 import akka.actor._
 import play.api.mvc._
-import de.htwg.mps.portals.controller.{Controller => GameController}
+import de.htwg.mps.portals.controller.{IController => GameController}
 import de.htwg.mps.portals.util.Observer
 import de.htwg.mps.portals.model.Player
 import de.htwg.mps.portals.controller._
 import de.htwg.mps.portals.util._
+
+import com.escalatesoft.subcut.inject.AutoInjectable
+import com.escalatesoft.subcut.inject.BindingModule
 
 object GameActor {
   def props(controller : GameController, out: ActorRef) = Props(new GameActor(controller, out))
@@ -23,8 +26,9 @@ class GameActor(controller : GameController, out: ActorRef) extends Actor {
     case ("enter")		=> wui.restartLevel
   }
   
-  class Wui(val controller: GameController) extends Observer[Event] {
-      controller.add(this)
+  class Wui(implicit val bindingModule: BindingModule) extends Observer[Event] with UserInterface with AutoInjectable {
+      val controller = inject [IController]
+	  controller.add(this)
       
       val player = Player.HumanPlayer1
       val level = new Level
