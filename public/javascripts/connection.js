@@ -72,11 +72,6 @@ $(document).ready(function() {
     
     function onMessage(evt) {
         if (0 == evt.data.indexOf(NEW_GAME)) {
-            // get players from old game (to remove the divs).
-            var players = $("[id^=PLAYER]");
-            for (var i = 0; i < players.size(); +i++) {
-                players[i].remove();
-            }
             newGame(evt.data.substring(NEW_GAME.length + 1));
         } else if (0 == evt.data.indexOf(UPDATE)){
             update(evt.data.substring(UPDATE.length + 1))
@@ -84,6 +79,14 @@ $(document).ready(function() {
             showScreen(GAME_WON);
         } else if (0 == evt.data.indexOf(GAME_LOST)){
             showScreen(GAME_LOST);
+        }
+    }
+    
+    function removePlayers() {
+        // get players from old game (to remove the divs).
+        var players = $("[id^=PLAYER]");
+        for (var i = 0; i < players.size(); +i++) {
+            players[i].remove();
         }
     }
     
@@ -142,6 +145,7 @@ $(document).ready(function() {
         
     
     function showScreen(picture) {
+        removePlayers();
         console.log(picture);
         for (i = 0; i < PLAYGROUND_HEIGHT; i++) {
             for (j = 0; j < PLAYGROUND_WIDTH; j++) {
@@ -154,6 +158,7 @@ $(document).ready(function() {
     }
 
     function newGame(playground) {
+        removePlayers();
         var lines = playground.split("\n");
 
         for (i in lines) {
